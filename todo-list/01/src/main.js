@@ -25,34 +25,36 @@ document.querySelector('#app').innerHTML = `
   </main>
 `;
 
-// 할 일 목록 추가
-const todoInput = document.querySelector('#todoInput');
 
-todoInput.addEventListener('keypress', function (e) {
+// element 정의
+const $all = document.querySelector('#all');
+const $complete = document.querySelector('#complete');
+const $incomplete = document.querySelector('#incomplete');
+const $todoInput = document.querySelector('#todoInput');
+const $todoItems = document.querySelector('#todoItems');
+
+// 할 일 목록 추가
+$todoInput.addEventListener('keypress', function (e) {
   if (e.key === 'Enter') {
-    const todoItems = document.querySelector('#todoItems');
-    const li = document.createElement('li');
-    li.innerHTML = `
+    const $li = document.createElement('li');
+    $li.innerHTML = `
       <input type="checkbox" />
-      <span>${todoInput.value}</span>
+      <span>${$todoInput.value}</span>
       <button class="delete" type="button">🗑️</button>
     `;
-    todoItems.appendChild(li);
-    todoInput.value = '';
+    $todoItems.appendChild($li);
+    $todoInput.value = '';
   }
 });
 
-// 할 일 목록 삭제
-const todoItems = document.querySelector('#todoItems');
 
-todoItems.addEventListener('click', function (e) {
+$todoItems.addEventListener('click', function (e) {
+  // 할 일 목록 삭제
   if (e.target.classList.contains('delete')) {
     e.target.parentElement.remove();
   }
-});
 
-// 체크박스 클릭시 완료 표시
-todoItems.addEventListener('click', function (e) {
+  // 체크박스 클릭시 완료 표시
   if (e.target.type === 'checkbox') {
     const span = e.target.nextElementSibling;
     if (e.target.checked) {
@@ -63,21 +65,16 @@ todoItems.addEventListener('click', function (e) {
   }
 });
 
-// 전체목록, 완료목록, 미완료목록 필터링
-const all = document.querySelector('#all');
-const complete = document.querySelector('#complete');
-const incomplete = document.querySelector('#incomplete');
 
-all.addEventListener('click', () => {
-  const items = document.querySelectorAll('#todoItems li');
-  items.forEach((item) => {
+// 전체목록, 완료목록, 미완료목록 필터링
+$all.addEventListener('click', () => {
+  $todoItems.querySelectorAll('li').forEach((item) => {
     item.style.display = '';
   });
 });
 
-complete.addEventListener('click', () => {
-  const items = document.querySelectorAll('#todoItems li');
-  items.forEach((item) => {
+$complete.addEventListener('click', () => {
+  $todoItems.querySelectorAll('li').forEach((item) => {
     if (item.children[0].checked) {
       item.style.display = '';
     } else {
@@ -86,9 +83,8 @@ complete.addEventListener('click', () => {
   });
 });
 
-incomplete.addEventListener('click', () => {
-  const items = document.querySelectorAll('#todoItems li');
-  items.forEach((item) => {
+$incomplete.addEventListener('click', () => {
+  $todoItems.querySelectorAll('li').forEach((item) => {
     if (!item.children[0].checked) {
       item.style.display = '';
     } else {
