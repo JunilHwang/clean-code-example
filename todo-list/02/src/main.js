@@ -44,13 +44,18 @@ const render = () => {
         `.trim()).join('')}
       </ul>
       <button id="all" type="button">전체목록</button>
-      <button id="complete" type="button">완료목록</button>
+      <button id="completed" type="button">완료목록</button>
       <button id="incomplete" type="button">미완료목록</button>
     </main>
   `;
 
-  // 할 일 목록 추가
   const $todoInput = document.querySelector('#todoInput');
+  const $todoItems = document.querySelector('#todoItems');
+  const $all = document.querySelector('#all');
+  const $completed = document.querySelector('#completed');
+  const $incomplete = document.querySelector('#incomplete');
+
+  // 할 일 목록 추가
   $todoInput.focus();
   $todoInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
@@ -60,7 +65,6 @@ const render = () => {
     }
   });
 
-  const $todoItems = document.querySelector('#todoItems');
   $todoItems.addEventListener('click', (e) => {
 
     // 할 일 목록 삭제
@@ -77,14 +81,18 @@ const render = () => {
   });
 
   // 필터링
-  document.querySelector('#all, #complete, #incomplete').addEventListener('click', (e) => {
+  $all.addEventListener('click', () => {
+    data.filterType = FilterTypes.ALL
+    render();
+  });
 
-    data.filterType = {
-      all: FilterTypes.ALL,
-      complete: FilterTypes.COMPLETED,
-      incomplete: FilterTypes.INCOMPLETE,
-    }[e.target.id];
+  $completed.addEventListener('click', () => {
+    data.filterType = FilterTypes.COMPLETED
+    render();
+  });
 
+  $incomplete.addEventListener('click', () => {
+    data.filterType = FilterTypes.INCOMPLETE
     render();
   });
 }
