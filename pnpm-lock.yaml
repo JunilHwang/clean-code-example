@@ -32,6 +32,12 @@ importers:
         specifier: ^5.1.0
         version: 5.1.3
 
+  todo-list/05:
+    devDependencies:
+      vite:
+        specifier: ^5.1.0
+        version: 5.1.3
+
 packages:
 
   /@esbuild/aix-ppc64@0.19.12:
