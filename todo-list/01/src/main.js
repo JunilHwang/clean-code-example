@@ -68,14 +68,14 @@ const all = document.querySelector('#all');
 const complete = document.querySelector('#complete');
 const incomplete = document.querySelector('#incomplete');
 
-all.addEventListener('click', function () {
+all.addEventListener('click', () => {
   const items = document.querySelectorAll('#todoItems li');
   items.forEach((item) => {
     item.style.display = '';
   });
 });
 
-complete.addEventListener('click', function () {
+complete.addEventListener('click', () => {
   const items = document.querySelectorAll('#todoItems li');
   items.forEach((item) => {
     if (item.children[0].checked) {
@@ -86,7 +86,7 @@ complete.addEventListener('click', function () {
   });
 });
 
-incomplete.addEventListener('click', function () {
+incomplete.addEventListener('click', () => {
   const items = document.querySelectorAll('#todoItems li');
   items.forEach((item) => {
     if (!item.children[0].checked) {
